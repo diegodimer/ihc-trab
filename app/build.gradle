@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.ppgc"
-        minSdk 21
+        minSdk 30
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -38,4 +38,5 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.google.zxing:core:3.2.1'
     implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+    implementation fileTree(dir:'libs', include: ['*.jar'])
 }

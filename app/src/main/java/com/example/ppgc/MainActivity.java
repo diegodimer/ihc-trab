@@ -7,12 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.database.sqlite;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int[] matriculas = {285642, 287691, 303030};
-    private int[] senhas = {285642, 287691, 303030};
+    private HashMap<String, String> usuarios = new HashMap<String, String>();
 
     TextView id;
     TextView password;
@@ -21,23 +20,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //db = new DatabaseHelper();
+
+        usuarios.put("530246", "530246");
+        usuarios.put("530247", "530247");
+        usuarios.put("584968", "584968");
     }
 
     public boolean verificalogin() {
-        id = findViewById(R.id.id);
-        password = findViewById(R.id.password);
+        try{
+            id = findViewById(R.id.id);
+            password = findViewById(R.id.password);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        //TODO
-        //retorna true se id e senha estao certos, senão false
-        for(int i = 0; i < matriculas.length; i++) {
-            if (matriculas[i] == Integer.parseInt(id.getText().toString())){
-                for(int j = 0; j < senhas.length; j++){
-                    if(senhas[j] == Integer.parseInt(password.getText().toString()))
-                        return true;
-                }
+        if (usuarios.containsKey(id.getText().toString())) {
+            if (usuarios.get(id.getText().toString()).equals(password.getText().toString())) {
+                return  true;
             }
         }
-        return false;
+            return false;
     }
 
     public void Send(View view) {

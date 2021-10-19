@@ -1,42 +1,65 @@
 package com.example.ppgc.database;
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 import com.example.ppgc.database.dbmodel.User;
 
 
-public class DatabaseHelper extends SQLiteOpenHelper{
-    // Database Version
-    private static final int DATABASE_VERSION = 1;
+public class DatabaseHelper{
 
     // Database Name
-    private static final String DATABASE_NAME = "ppgc_db";
+    private final String DATABASE_NAME = "IHC";
+    private final String DATABASE_ADDRESS = "10.0.2.2";
+    private final Integer DATABASE_PORT = 5432;
+    private final String DATABASE_USER = "postgres";
+    private final String DATABASE_PASSWORD = "changeme";
+    private String connectionString = "jdbc:postgresql://%s:%d/%s";
+    private boolean status;
 
-    public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    private Connection connection;
+
+
+    public DatabaseHelper() {
+        this.connectionString = String.format(this.connectionString, this.DATABASE_ADDRESS, this.DATABASE_PORT, this.DATABASE_NAME);
+        connect();
     }
 
-    // Creating Tables
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-
-        // create notes table
-        db.execSQL(User.CREATE_TABLE);
+    private void connect() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Class.forName("org.postgresql.Driver");
+                    connection = DriverManager.getConnection(connectionString, DATABASE_USER, DATABASE_PASSWORD);
+                    status = true;
+                    System.out.println("connected:" + status);
+                } catch (Exception e) {
+                    status = false;
+                    System.out.print(e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.status = false;
+        }
     }
 
-    // Upgrading database
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop older table if existed
-        db.execSQL("DROP TABLE IF EXISTS " + User.TABLE_NAME);
+    public Connection getExtraConnection(){
+        Connection c = null;
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection(connectionString, DATABASE_USER, DATABASE_PASSWORD);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        // Create tables again
-        onCreate(db);
+        return c;
     }
 
-    public SQLiteDatabase getReadableDb() {
-        return this.getReadableDatabase();
-    }
 }

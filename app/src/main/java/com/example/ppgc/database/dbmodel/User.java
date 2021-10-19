@@ -30,9 +30,10 @@ public class User {
             + "FOREIGN KEY(" + COLUMN_ADVISOR + ") REFEREMCES Advisor(" + COLUMN_ADVISOR + "));";
 
 
-    public User(int id, String name, String mail, String phone, int advId) {
+    public User(int id, String login, String name, String mail, String phone, int advId) {
         this.userId = id;
         this.name = name;
+        this.login = login;
         this.userEmail = mail;
         this.phoneNumber = phone;
         this.advisorId = advId;
