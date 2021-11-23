@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void Send(View view) {
         if (verificalogin()) {
-            Intent i = new Intent(getApplicationContext(), teladecaptura.class);
+            Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
             startActivity(i);
         }
         else{

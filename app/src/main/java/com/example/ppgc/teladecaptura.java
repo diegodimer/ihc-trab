@@ -42,7 +42,7 @@ public class teladecaptura extends AppCompatActivity {
         });
 
         dl = (DrawerLayout) findViewById(R.id.dl);
-        abdt = new ActionBarDrawerToggle(this, dl, R.string.Open, R.string.Close);
+        abdt = new ActionBarDrawerToggle(this, dl, R.string.drawer_open, R.string.drawer_close);
         abdt.setDrawerIndicatorEnabled(true);
 
         dl.addDrawerListener(abdt);

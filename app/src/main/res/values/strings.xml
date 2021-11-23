@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">PPGC</string>
-    <string name="Open">Open</string>
-    <string name="Close">Close</string>
+    <string name="drawer_open">Abrir menu lateral</string>
+    <string name="drawer_close">Fechar menu lateral</string>
 </resources>
