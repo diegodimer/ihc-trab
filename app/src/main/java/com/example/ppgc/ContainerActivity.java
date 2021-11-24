@@ -45,7 +45,7 @@ public class ContainerActivity extends AppCompatActivity implements NavigationVi
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new CapturaFragment()).commit();
+                    new ProfileFragment()).commit();
             navigationView.setCheckedItem(R.id.profile);
         }
     }
@@ -64,9 +64,9 @@ public class ContainerActivity extends AppCompatActivity implements NavigationVi
         switch (item.getItemId()) {
             case R.id.profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new CapturaFragment()).commit();
+                        new ProfileFragment()).commit();
                 break;
-            case R.id.presences:
+            case R.id.mark_presence:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new CapturaFragment()).commit();
                 break;

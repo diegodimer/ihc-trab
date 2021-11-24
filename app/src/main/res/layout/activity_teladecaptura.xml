@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:id="@+id/drawer_layout"
-    tools:context=".TelaDeCapturaActivity"
+    tools:context=".ContainerActivity"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +28,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".TelaDeCapturaActivity">
+        tools:context=".ContainerActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar4"
