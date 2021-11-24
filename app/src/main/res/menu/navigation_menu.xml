@@ -5,6 +5,10 @@
         android:title="Perfil"
         android:icon="@drawable/ic_baseline_person_24"></item>
     <item
+        android:id="@+id/mark_presence"
+        android:title="Marcar Presença"
+        android:icon="@drawable/ic_baseline_wysiwyg_24"></item>
+    <item
         android:id="@+id/presences"
         android:title="Presenças"
         android:icon="@drawable/ic_baseline_wysiwyg_24"></item>

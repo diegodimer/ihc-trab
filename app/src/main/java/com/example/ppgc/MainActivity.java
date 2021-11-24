@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         usuarios.put("530246", "530246");
         usuarios.put("530247", "530247");
         usuarios.put("584968", "584968");
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     public boolean verificalogin() {
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void Send(View view) {
         if (verificalogin()) {
-            Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
+            Intent i = new Intent(getApplicationContext(), ContainerActivity.class);
             startActivity(i);
         }
         else{
