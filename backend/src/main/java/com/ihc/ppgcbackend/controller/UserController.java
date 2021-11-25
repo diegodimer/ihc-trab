@@ -27,7 +27,7 @@ public class UserController {
 
     @RequestMapping(value ="/new", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public Map<String, Object> newUser(@RequestParam("name") String name, @RequestParam("e-mail") String email, @RequestParam("phone") String phone, @RequestParam("password") String password, @RequestParam("advisor") String advisor) throws IOException {
+    public Map<String, Object> newUser(@RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("phone") String phone, @RequestParam("password") String password, @RequestParam("advisor") String advisor) throws IOException {
         User user = userService.createUser(name, email, phone, password, advisor);
         Map<String, Object> rtn = new LinkedHashMap<>();
         rtn.put("status", HttpStatus.OK);
