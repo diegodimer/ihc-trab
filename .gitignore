@@ -48,5 +48,3 @@ build/
 ### VS Code ###
 .vscode/
 
-## backend db data
-backend/src/main/resources/application.properties
