@@ -28,7 +28,7 @@ API endpoints:
 |-------------------|------------------------------------------|--------|---------------------------------------|
 | /user/new         | name, email, phone, password, advisor    | POST   | status, userId                        |
 | /user/get         | userId                                   | POST   | status, name, email, advisor, phone   |
-| /user/login       | user, password                           | POST   | status                                |
+| /user/login       | user, password                           | POST   | status, userId                                |
 | /presence/add     | day, month, year, userId, status, reason | POST   | status, presenceId                    |
 | /presence/justify | presenceId, reason                       | POST   | status, message                       |
 | /presence/get     | userId, month, year                      | POST   | status, presences                     |

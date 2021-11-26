@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -40,12 +42,20 @@ public class UserService {
         return userRepo.insert(newUser);
     }
 
-    public boolean authenticate(String name, String password) {
+    public Map<String, Object> authenticate(String name, String password) {
+        Map<String, Object> rtn = new LinkedHashMap<>();
         Query query = new Query();
         query.addCriteria( Criteria.where("name").is(name).and("password").is(password));
-        if (mongoTemplate.find(query, Presence.class).isEmpty())
-            return false;
-        else
-            return true;
+        List<User> userOpt = mongoTemplate.find(query, User.class);
+        if (userOpt.isEmpty()) {
+            rtn.put("userId", "");
+            rtn.put("status", HttpStatus.NOT_FOUND);
+        }
+        else {
+            User user = userOpt.get(0);
+            rtn.put("userId", user.getId());
+            rtn.put("status", HttpStatus.OK);
+        }
+        return rtn;
     }
 }

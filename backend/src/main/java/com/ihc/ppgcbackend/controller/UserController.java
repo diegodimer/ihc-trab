@@ -38,12 +38,7 @@ public class UserController {
     @RequestMapping(value ="/login", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public Map<String, Object> authenticateUser(@RequestParam("user") String name, @RequestParam("password") String password) throws IOException {
-        boolean exists = userService.authenticate(name, password);
-        Map<String, Object> rtn = new LinkedHashMap<>();
-        if(exists)
-            rtn.put("status", HttpStatus.OK);
-        else
-            rtn.put("status", HttpStatus.NOT_FOUND);
+        Map<String, Object> rtn = userService.authenticate(name, password);
         return rtn;
     }
 
