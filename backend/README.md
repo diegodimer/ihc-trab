@@ -18,7 +18,7 @@
 ## Uso do backend (em deploy no Heroku)
 URL BASE: https://back287690.herokuapp.com/
 
-Test endpoints:
+Endpoints de teste:
 - https://back287690.herokuapp.com/user/new
 - https://back287690.herokuapp.com/presence/upload
 
@@ -32,3 +32,10 @@ API endpoints:
 | /presence/add     | day, month, year, userId, status, reason | POST   | status, presenceId                    |
 | /presence/justify | presenceId, reason                       | POST   | status, message                       |
 | /presence/get     | userId, month, year                      | POST   | status, presences                     |
+
+### Uso local 
+- O docker-compose provido nesse diretório tem a função de:
+  - Levantar o servico do mongoDB
+  - Executar o maven clean install
+  - Executar a aplicação
+- Para rodar a imagem o comando é: ``docker-compose up -d`` (requer docker e docker-compose)
