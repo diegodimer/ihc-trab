@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -20,13 +22,17 @@ public class UserService {
     @Autowired
     UserRepository userRepo;
 
-    public String getUser(String userId) {
+    public Map<String, Object> getUser(String userId) {
+        Map<String, Object> rtn = new LinkedHashMap<>();
         Optional<User> userOpt = userRepo.findById(userId);
-        if (userOpt.isPresent())
-            return userOpt.get().getEmail();
-        else {
-            return "User not found.";
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            rtn.put("name", user.getName());
+            rtn.put("email", user.getEmail());
+            rtn.put("advisor", user.getAdvisor());
+            rtn.put("phone", user.getPhone());
         }
+        return rtn;
     }
 
     public User createUser(String name, String email, String phone, String password, String advisor) {

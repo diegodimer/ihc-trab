@@ -23,7 +23,7 @@ public class PresenceController {
     @GetMapping("/upload")
     public String uploadPresence(Model model) {
         //used for testing
-        return "uploadPresence";
+        return "addPresence";
     }
 
     @RequestMapping(value ="/add", method = RequestMethod.POST, produces = "application/json")

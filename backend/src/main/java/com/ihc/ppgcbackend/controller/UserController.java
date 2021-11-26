@@ -50,13 +50,11 @@ public class UserController {
     @RequestMapping(value ="/get", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public Map<String, Object> getUser(@RequestParam("userId") String userId) throws IOException {
-        String message = userService.getUser(userId);
-        Map<String, Object> rtn = new LinkedHashMap<>();
-        if(message.equals("User not found."))
+        Map<String, Object> rtn = userService.getUser(userId);
+        if(rtn.isEmpty())
             rtn.put("status", HttpStatus.NOT_FOUND);
         else {
             rtn.put("status", HttpStatus.OK);
-            rtn.put("userId", message);
         }
         return rtn;
     }
