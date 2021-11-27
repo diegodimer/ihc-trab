@@ -12,12 +12,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.httpRequests.HttpRequests;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Date;
 
 public class CapturaFragment extends Fragment {
 
     private Button btnScan;
+    private String userId;
+    private HttpRequests httpRequester;
 
     @Nullable
     @Override
@@ -25,6 +32,9 @@ public class CapturaFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_teladecaptura, container, false);
 
         btnScan = (Button) view.findViewById(R.id.btnScan);
+        Bundle bundle = getArguments();
+        this.userId = bundle.getString("userId");
+        this.httpRequester = (HttpRequests) bundle.getSerializable("httpRequester");
 
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,12 +48,13 @@ public class CapturaFragment extends Fragment {
         });
         return view;
     }
-
-    protected void onActionResult(int requestCode, int resultCode, Intent data){
+    protected void onActionResult(int requestCode, int resultCode, Intent data) throws IOException {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null){
             if(result.getContents() != null){
-                alert(result.getContents());
+                LocalDate date = LocalDate.now();
+                httpRequester.addUserPresence(this.userId, String.valueOf(date.getDayOfMonth()),
+                        String.valueOf(date.getMonth()), String.valueOf(date.getYear()), "", "PRESENT");
             }
             else{
                 alert("Scan cancelado");
